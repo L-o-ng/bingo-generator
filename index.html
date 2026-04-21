@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Friend Bingo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Reenie+Beanie&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SCREEN 1: Enter code -->
+  <div id="screen-home" class="screen active">
+    <div class="pin"></div>
+    <div class="card home-card">
+      <h1 class="title">friend<br><span class="bingo-word">bingo</span></h1>
+      <p class="subtitle">enter a code to join your group,<br>or make a new one</p>
+      <div class="input-row">
+        <input id="code-input" type="text" placeholder="e.g. CHAOS42" maxlength="12" autocomplete="off" spellcheck="false" />
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="joinRoom()">join</button>
+        <button class="btn btn-secondary" onclick="createRoom()">create new</button>
+      </div>
+      <p id="home-error" class="error-msg"></p>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: Room -->
+  <div id="screen-room" class="screen">
+    <div class="pin"></div>
+    <div class="card room-card">
+      <div class="room-header">
+        <button class="back-btn" onclick="goHome()">← back</button>
+        <div class="room-code-badge">
+          <span class="room-code-label">room</span>
+          <span id="room-code-display"></span>
+        </div>
+      </div>
+
+      <div class="add-section">
+        <h2 class="section-title">add a square</h2>
+        <div class="add-row">
+          <input id="square-input" type="text" placeholder="e.g. someone cries at a film" maxlength="80" autocomplete="off" />
+          <button class="btn btn-add" onclick="addSquare()">+</button>
+        </div>
+        <p id="add-error" class="error-msg"></p>
+      </div>
+
+      <div class="squares-section">
+        <h2 class="section-title">
+          the list
+          <span id="square-count" class="count-badge">0 squares</span>
+        </h2>
+        <div id="squares-list" class="squares-list">
+          <p class="empty-msg">no squares yet — add some!</p>
+        </div>
+      </div>
+
+      <div class="generate-section">
+        <p id="generate-hint" class="generate-hint"></p>
+        <button id="generate-btn" class="btn btn-generate" onclick="generateGrid()">generate my card</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: Bingo Grid -->
+  <div id="screen-grid" class="screen">
+    <div class="pin"></div>
+    <div class="card grid-card">
+      <div class="grid-header">
+        <button class="back-btn" onclick="goRoom()">← back</button>
+        <h2 class="grid-title">your card</h2>
+        <button class="btn btn-regenerate" onclick="generateGrid()">shuffle</button>
+      </div>
+      <div id="bingo-grid" class="bingo-grid"></div>
+      <p class="screenshot-hint">📸 screenshot to save your card</p>
+    </div>
+  </div>
+
+  <script src="supabase.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
